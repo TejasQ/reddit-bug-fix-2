@@ -5,16 +5,16 @@ import {Link} from 'react-router-dom'
 const URI = 'http://localhost:3650/blogs/'
 
 const CompShowBlogs = ()=>{
-    const [blogs, setBlog] = useState([])
-    useEffect( ()=>{
-        getBlogs()
-    },[])
-
     //procedimiento para ver todos los blogs
     const getBlogs = async ()=>{
         const res = await axios.get(URI)
         setBlog(res.data)
     }
+    const [blogs, setBlog] = useState([])
+    useEffect( ()=>{
+        getBlogs()
+    },[getBlogs])
+
     //procedimiento para eliminae un blog
     const deleteBlog = async (id)=> {
         await axios.delete(`${URI}${id}`)
